@@ -8,6 +8,7 @@ public class Romes extends Number {
     private String result_string;
     private final String[] roman_letters_9 = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
     private final String[] roman_letters_2 = {"L", "C" };
+    private final String[] roman_letters_1 = {"X"};
     Romes(String value1, String value2) {
         this.romes_value1_int = convert_to_int(value1);
         this.romes_value2_int = convert_to_int(value2);
@@ -17,23 +18,35 @@ public class Romes extends Number {
         if (n == 100)
         {
             return roman_letters_2[1] + convert_result_to_Romes(0);
-        } else {
-            if (ostatok != 0) {
-                try {
-                    if (n < 50) {
-                        if (n > 40) {
+        }
+        else
+            {
+                if (n == 90)
+                {
+                    return roman_letters_1[0] + roman_letters_2[1] + convert_result_to_Romes(0);
+                }
+            if (ostatok != 0)
+                {
+                try
+                    {
+                    if (n < 50)
+                        {
+                        if (n > 40)
+                            {
                             return convert_result_to_Romes(n - ostatok - 30) + roman_letters_2[0] + roman_letters_9[(ostatok - 1)];
-                        }
+                            }
                         return convert_result_to_Romes(n - ostatok) + roman_letters_9[(ostatok - 1)];
-                    } else {
+                        } else
+                            {
                         return roman_letters_2[0] + convert_result_to_Romes(n - 50);
-                    }
-                } catch (ArrayIndexOutOfBoundsException e) {
+                            }
+                    } catch (ArrayIndexOutOfBoundsException e)
+                {
                     sign = "-";
                     return convert_result_to_Romes(n - ostatok) + roman_letters_9[(ostatok + 1) * -1];
                 }
+                }
             }
-        }
         //Возможность вывести отрицательное римское число
         if (n > 0) {
             n = n - 10;
