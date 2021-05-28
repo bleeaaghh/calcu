@@ -7,7 +7,7 @@ public class Romes extends Number {
     private String sign = "";
     private String result_string;
     private final String[] roman_letters_9 = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
-
+    private final String[] roman_letters_2 = {"L", "C" };
     Romes(String value1, String value2) {
         this.romes_value1_int = convert_to_int(value1);
         this.romes_value2_int = convert_to_int(value2);
@@ -16,7 +16,14 @@ public class Romes extends Number {
         int ostatok = n % 10;
         if (ostatok != 0) {
             try {
-                return convert_result_to_Romes(n - ostatok) + roman_letters_9[ostatok - 1];
+                if (n < 50)
+                {
+                return convert_result_to_Romes(n - ostatok) + roman_letters_9[(ostatok - 1)];
+                }
+                else
+                {
+                    return roman_letters_2[ostatok - 1] + convert_result_to_Romes(n - 50);
+                }
             } catch (ArrayIndexOutOfBoundsException e) {
                 sign = "-";
                 return convert_result_to_Romes(n - ostatok) + roman_letters_9[(ostatok + 1) * -1];
@@ -80,13 +87,14 @@ public class Romes extends Number {
                 case 'I' -> values_int[i] = 1;
                 case 'V' -> values_int[i] = 5;
                 case 'X' -> values_int[i] = 10;
+                case 'L' -> values_int[i] = 50;
                 default -> System.out.println("Error (Wrong writing of Rome number)\n");
             }
         }
         int result = values_int[0];
         for (int i = 0; i < values_int.length && values_int.length > i + 1; i++) {
             if (values_int[i] >= values_int[i+1]) {
-                result += values_int[i+1];
+                result += values_int[i + 1];
             } else if (values_int[i] < values_int[i+1]) {
                 result = result + values_int[i+1] - 2;
             }
