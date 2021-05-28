@@ -14,19 +14,24 @@ public class Romes extends Number {
     }
     private String convert_result_to_Romes(int n) {
         int ostatok = n % 10;
-        if (ostatok != 0) {
-            try {
-                if (n < 50)
-                {
-                return convert_result_to_Romes(n - ostatok) + roman_letters_9[(ostatok - 1)];
+        if (n == 100)
+        {
+            return roman_letters_2[1] + convert_result_to_Romes(0);
+        } else {
+            if (ostatok != 0) {
+                try {
+                    if (n < 50) {
+                        if (n > 40) {
+                            return convert_result_to_Romes(n - ostatok - 30) + roman_letters_2[0] + roman_letters_9[(ostatok - 1)];
+                        }
+                        return convert_result_to_Romes(n - ostatok) + roman_letters_9[(ostatok - 1)];
+                    } else {
+                        return roman_letters_2[0] + convert_result_to_Romes(n - 50);
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    sign = "-";
+                    return convert_result_to_Romes(n - ostatok) + roman_letters_9[(ostatok + 1) * -1];
                 }
-                else
-                {
-                    return roman_letters_2[ostatok - 1] + convert_result_to_Romes(n - 50);
-                }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                sign = "-";
-                return convert_result_to_Romes(n - ostatok) + roman_letters_9[(ostatok + 1) * -1];
             }
         }
         //Возможность вывести отрицательное римское число
